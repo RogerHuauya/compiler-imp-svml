@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Compiler Imp-Dec to SVML: Exp Class Reference</title>
+<title>Compiler Imp-Dec to SVML: BoolConstExp Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,44 +63,49 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="classExp-members.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="classBoolConstExp-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Exp Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">BoolConstExp Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
-Inheritance diagram for Exp:</div>
+Inheritance diagram for BoolConstExp:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classExp.png" usemap="#Exp_map" alt=""/>
-  <map id="Exp_map" name="Exp_map">
-<area href="classBinaryExp.html" alt="BinaryExp" shape="rect" coords="0,56,90,80"/>
-<area href="classBoolConstExp.html" alt="BoolConstExp" shape="rect" coords="100,56,190,80"/>
-<area href="classCondExp.html" alt="CondExp" shape="rect" coords="200,56,290,80"/>
-<area href="classIdExp.html" alt="IdExp" shape="rect" coords="300,56,390,80"/>
-<area href="classNumberExp.html" alt="NumberExp" shape="rect" coords="400,56,490,80"/>
-<area href="classParenthExp.html" alt="ParenthExp" shape="rect" coords="500,56,590,80"/>
+  <img src="classBoolConstExp.png" usemap="#BoolConstExp_map" alt=""/>
+  <map id="BoolConstExp_map" name="BoolConstExp_map">
+<area href="classExp.html" alt="Exp" shape="rect" coords="0,0,90,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1daa0b9cf2371ef29c07e017993c32c5"><td class="memItemLeft" align="right" valign="top"><a id="a1daa0b9cf2371ef29c07e017993c32c5"></a>
-virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classImpVisitor.html">ImpVisitor</a> *v)=0</td></tr>
-<tr class="separator:a1daa0b9cf2371ef29c07e017993c32c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4395f2f489c5bce28dd4492823a66a81"><td class="memItemLeft" align="right" valign="top"><a id="a4395f2f489c5bce28dd4492823a66a81"></a>
-virtual <a class="el" href="classImpValue.html">ImpValue</a>&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classImpValueVisitor.html">ImpValueVisitor</a> *v)=0</td></tr>
-<tr class="separator:a4395f2f489c5bce28dd4492823a66a81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2df6a5c9ef8d0ee65fe8788d1cd1f970"><td class="memItemLeft" align="right" valign="top"><a id="a2df6a5c9ef8d0ee65fe8788d1cd1f970"></a>
-virtual ImpType&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classTypeVisitor.html">TypeVisitor</a> *v)=0</td></tr>
-<tr class="separator:a2df6a5c9ef8d0ee65fe8788d1cd1f970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a380d549bd1f1faf970e5875dbd3e826d"><td class="memItemLeft" align="right" valign="top"><a id="a380d549bd1f1faf970e5875dbd3e826d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>BoolConstExp</b> (bool v)</td></tr>
+<tr class="separator:a380d549bd1f1faf970e5875dbd3e826d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace96a8b4149f5fff3e24bdf67de122ea"><td class="memItemLeft" align="right" valign="top"><a id="ace96a8b4149f5fff3e24bdf67de122ea"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classImpVisitor.html">ImpVisitor</a> *v)</td></tr>
+<tr class="separator:ace96a8b4149f5fff3e24bdf67de122ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3168c2b000e2648c9e53d1168865c0b7"><td class="memItemLeft" align="right" valign="top"><a id="a3168c2b000e2648c9e53d1168865c0b7"></a>
+<a class="el" href="classImpValue.html">ImpValue</a>&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classImpValueVisitor.html">ImpValueVisitor</a> *v)</td></tr>
+<tr class="separator:a3168c2b000e2648c9e53d1168865c0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b14caee983f89722f5d520f7b9c99d3"><td class="memItemLeft" align="right" valign="top"><a id="a0b14caee983f89722f5d520f7b9c99d3"></a>
+ImpType&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classTypeVisitor.html">TypeVisitor</a> *v)</td></tr>
+<tr class="separator:a0b14caee983f89722f5d520f7b9c99d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a4ce37f74abda162162f557227afa684a"><td class="memItemLeft" align="right" valign="top"><a id="a4ce37f74abda162162f557227afa684a"></a>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ad844888a48cce7a97ac926bcab8aeb65"><td class="memItemLeft" align="right" valign="top"><a id="ad844888a48cce7a97ac926bcab8aeb65"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>value</b></td></tr>
+<tr class="separator:ad844888a48cce7a97ac926bcab8aeb65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_static_methods_classExp"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classExp')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classExp.html">Exp</a></td></tr>
+<tr class="memitem:a4ce37f74abda162162f557227afa684a inherit pub_static_methods_classExp"><td class="memItemLeft" align="right" valign="top"><a id="a4ce37f74abda162162f557227afa684a"></a>
 static string&#160;</td><td class="memItemRight" valign="bottom"><b>binopToString</b> (BinaryOp op)</td></tr>
-<tr class="separator:a4ce37f74abda162162f557227afa684a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a4ce37f74abda162162f557227afa684a inherit pub_static_methods_classExp"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/<a class="el" href="imp_8hh_source.html">imp.hh</a></li>

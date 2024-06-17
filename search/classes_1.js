@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['binaryexp_34',['BinaryExp',['../classBinaryExp.html',1,'']]],
-  ['body_35',['Body',['../classBody.html',1,'']]]
+  ['binaryexp_35',['BinaryExp',['../classBinaryExp.html',1,'']]],
+  ['body_36',['Body',['../classBody.html',1,'']]],
+  ['boolconstexp_37',['BoolConstExp',['../classBoolConstExp.html',1,'']]]
 ];
