@@ -6,12 +6,10 @@
 void ImpInterpreter::interpret(Program *p) {
     env.clear();
     p->accept(this);
-    return;
 }
 
 void ImpInterpreter::visit(Program *p) {
     p->body->accept(this);
-    return;
 }
 
 void ImpInterpreter::visit(Body *b) {
@@ -19,7 +17,6 @@ void ImpInterpreter::visit(Body *b) {
     b->var_decs->accept(this);
     b->slist->accept(this);
     env.remove_level();
-    return;
 }
 
 
@@ -28,8 +25,7 @@ void ImpInterpreter::visit(VarDecList *decs) {
     for (it = decs->vdlist.begin(); it != decs->vdlist.end(); ++it) {
         (*it)->accept(this);
     }
-    return;
-}
+    }
 
 void ImpInterpreter::visit(VarDec *vd) {
     list<string>::iterator it;
@@ -101,7 +97,14 @@ void ImpInterpreter::visit(WhileStatement *s) {
         s->body->accept(this);
         v = s->cond->accept(this);
     }
-    return;
+}
+
+void ImpInterpreter::visit(DoWhileStatement *s) {
+    ImpValue v;
+    do {
+        s->body->accept(this);
+        v = s->cond->accept(this);
+    } while (v.bool_value);
 }
 
 ImpValue ImpInterpreter::visit(BinaryExp *e) {

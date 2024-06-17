@@ -217,11 +217,11 @@ Program *Parser::parse() {
     if (current->type != Token::END) {
         cout << "Esperaba fin-de-input, se encontro " << current << endl;
         delete p;
-        p = NULL;
+        p = nullptr;
         exit(0);
     }
 
-    if (current) delete current;
+    delete current;
 
     return p;
 }
@@ -284,12 +284,9 @@ StatementList *Parser::parseStatementList() {
     return p;
 }
 
-/*
-  id = exp
-  print(x)
- */
+
 Stm *Parser::parseStatement() {
-    Stm *s = NULL;
+    Stm *s = nullptr;
     Exp *e;
     Body *tb, *fb;
     if (match(Token::ID)) {
@@ -316,7 +313,7 @@ Stm *Parser::parseStatement() {
         if (!match(Token::THEN))
             parserError("Esperaba 'then'");
         tb = parseBody();
-        fb = NULL;
+        fb = nullptr;
         if (match(Token::ELSE)) {
             fb = parseBody();
         }
@@ -331,6 +328,12 @@ Stm *Parser::parseStatement() {
         if (!match(Token::ENDWHILE))
             parserError("Esperaba 'endwhile'");
         s = new WhileStatement(e, tb);
+    } else if (match(Token::DO)) {
+        tb = parseBody();
+        if (!match(Token::WHILE))
+            parserError("Esperaba 'while'");
+        e = parseCExp();
+        s = new DoWhileStatement(e, tb);
     } else {
         cout << "No se encontro Statement" << endl;
         exit(0);

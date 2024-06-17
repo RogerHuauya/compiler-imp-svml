@@ -207,6 +207,22 @@ public:
     ~WhileStatement();
 };
 
+class DoWhileStatement : public Stm {
+public:
+    Exp *cond;
+    Body *body;
+
+    DoWhileStatement(Exp *c, Body *b);
+
+    void accept(ImpVisitor *v);
+
+    void accept(ImpValueVisitor *v);
+
+    void accept(TypeVisitor *v);
+
+    ~DoWhileStatement();
+};
+
 
 class StatementList {
 public:

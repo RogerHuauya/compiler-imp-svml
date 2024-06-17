@@ -18,6 +18,7 @@ Stm          ::= id "=" Exp
 | "print" "(" Exp ")"
 | "if" Exp "then" Body ["else" Body] "endif"
 | "while" Exp "do" Body "endwhile"
+| "do" Body "while" Exp
 Exp          ::= BExp
 BExp         ::= CExp (("and" | "or") BExp)?
 CExp         ::= AExp (("<" | "<=" | "==") AExp)?

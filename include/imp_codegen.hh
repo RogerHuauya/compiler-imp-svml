@@ -33,6 +33,7 @@ public:
 
     void visit(WhileStatement *);
 
+    void visit(DoWhileStatement *);
 
     int visit(BinaryExp *e);
 

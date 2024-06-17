@@ -93,6 +93,15 @@ void ImpTypeChecker::visit(WhileStatement *s) {
     s->body->accept(this);
 }
 
+void ImpTypeChecker::visit(DoWhileStatement *s) {
+    ImpType tcond_type = s->cond->accept(this);
+    if (tcond_type != TBOOL) {
+        cout << "Condition in do while statement must be boolean" << endl;
+        exit(0);
+    }
+    s->body->accept(this);
+}
+
 ImpType ImpTypeChecker::visit(BinaryExp *e) {
     ImpType t1 = e->left->accept(this);
     ImpType t2 = e->right->accept(this);

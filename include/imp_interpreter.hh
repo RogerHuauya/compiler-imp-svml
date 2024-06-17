@@ -32,6 +32,8 @@ public:
 
     void visit(WhileStatement *);
 
+    void visit(DoWhileStatement *);
+
     ImpValue visit(BinaryExp *e);
 
     ImpValue visit(NumberExp *e);
