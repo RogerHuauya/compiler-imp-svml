@@ -1,5 +1,4 @@
-#ifndef IMP_TYPECHECKER
-#define IMP_TYPECHECKER
+#pragma once
 
 #include <unordered_map>
 
@@ -11,29 +10,39 @@ using namespace std;
 
 class ImpTypeChecker : public TypeVisitor {
 public:
-  ImpTypeChecker();
+    ImpTypeChecker();
+
 private:
-  Environment<ImpType> env;
+    Environment<ImpType> env;
 
 public:
-  void typecheck(Program*);
-  void visit(Program*);
-  void visit(Body*);
-  void visit(VarDecList*);
-  void visit(VarDec*);
-  void visit(StatementList*);
-  void visit(AssignStatement*);
-  void visit(PrintStatement*);
-  void visit(IfStatement*);
-  void visit(WhileStatement*);
-  
-  ImpType visit(BinaryExp* e);
-  ImpType visit(NumberExp* e);
-  ImpType visit(IdExp* e);
-  ImpType visit(ParenthExp* e);
-  ImpType visit(CondExp* e);
+    void typecheck(Program *);
+
+    void visit(Program *);
+
+    void visit(Body *);
+
+    void visit(VarDecList *);
+
+    void visit(VarDec *);
+
+    void visit(StatementList *);
+
+    void visit(AssignStatement *);
+
+    void visit(PrintStatement *);
+
+    void visit(IfStatement *);
+
+    void visit(WhileStatement *);
+
+    ImpType visit(BinaryExp *e);
+
+    ImpType visit(NumberExp *e);
+
+    ImpType visit(IdExp *e);
+
+    ImpType visit(ParenthExp *e);
+
+    ImpType visit(CondExp *e);
 };
-
-
-#endif
-

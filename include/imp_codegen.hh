@@ -1,5 +1,4 @@
-#ifndef IMP_CODEGEN
-#define IMP_CODEGEN
+#pragma once
 
 #include <sstream>
 #include <iostream>
@@ -14,36 +13,49 @@
 
 class ImpCodeGen : public ImpVisitor {
 public:
-  void codegen(Program*, string outfname);
-  void visit(Program*);
-  void visit(Body*);
-  void visit(VarDecList*);
-  void visit(VarDec*);
-  void visit(StatementList*);
-  void visit(AssignStatement*);
-  void visit(PrintStatement*);
-  void visit(IfStatement*);
-  void visit(WhileStatement*);
+    void codegen(Program *, const string& outfname);
 
-  
-  int visit(BinaryExp* e);
-  int visit(NumberExp* e);
-  int visit(IdExp* e);
-  int visit(ParenthExp* e);
-  int visit(CondExp* e);
+    void visit(Program *);
+
+    void visit(Body *);
+
+    void visit(VarDecList *);
+
+    void visit(VarDec *);
+
+    void visit(StatementList *);
+
+    void visit(AssignStatement *);
+
+    void visit(PrintStatement *);
+
+    void visit(IfStatement *);
+
+    void visit(WhileStatement *);
+
+
+    int visit(BinaryExp *e);
+
+    int visit(NumberExp *e);
+
+    int visit(IdExp *e);
+
+    int visit(ParenthExp *e);
+
+    int visit(CondExp *e);
 
 private:
-  std::ostringstream code;
-  string nolabel;
-  int current_label;
-  Environment<int> direcciones;
-  int siguiente_direccion;
-  void codegen(string label, string instr);
-  void codegen(string label, string instr, int arg);
-  void codegen(string label, string instr, string jmplabel);
-  string next_label();
+    std::ostringstream code;
+    string nolabel;
+    int current_label;
+    Environment<int> direcciones;
+    int siguiente_direccion;
+
+    void codegen(const string& label, string instr);
+
+    void codegen(const string& label, string instr, int arg);
+
+    void codegen(const string& label, string instr, string jmplabel);
+
+    string next_label();
 };
-
-
-#endif
-

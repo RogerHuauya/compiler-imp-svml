@@ -1,18 +1,18 @@
 #include "imp_codegen.hh"
 
-void ImpCodeGen::codegen(string label, string instr) {
+void ImpCodeGen::codegen(const string &label, string instr) {
     if (label != nolabel)
         code << label << ": ";
     code << instr << endl;
 }
 
-void ImpCodeGen::codegen(string label, string instr, int arg) {
+void ImpCodeGen::codegen(const string& label, string instr, int arg) {
     if (label != nolabel)
         code << label << ": ";
     code << instr << " " << arg << endl;
 }
 
-void ImpCodeGen::codegen(string label, string instr, string jmplabel) {
+void ImpCodeGen::codegen(const string& label, string instr, string jmplabel) {
     if (label != nolabel)
         code << label << ": ";
     code << instr << " " << jmplabel << endl;
@@ -25,7 +25,7 @@ string ImpCodeGen::next_label() {
     return l;
 }
 
-void ImpCodeGen::codegen(Program *p, string outfname) {
+void ImpCodeGen::codegen(Program *p, const string &outfname) {
     nolabel = "";
     current_label = 0;
     siguiente_direccion = 0;
@@ -34,8 +34,6 @@ void ImpCodeGen::codegen(Program *p, string outfname) {
     outfile.open(outfname);
     outfile << code.str();
     outfile.close();
-
-    return;
 }
 
 void ImpCodeGen::visit(Program *p) {
@@ -43,7 +41,6 @@ void ImpCodeGen::visit(Program *p) {
     codegen(nolabel, "alloc", mem_size);
     p->body->accept(this);
     codegen(nolabel, "halt");
-    return;
 }
 
 void ImpCodeGen::visit(Body *b) {
@@ -51,7 +48,6 @@ void ImpCodeGen::visit(Body *b) {
     b->var_decs->accept(this);
     b->slist->accept(this);
     direcciones.remove_level();
-    return;
 }
 
 void ImpCodeGen::visit(VarDecList *s) {
@@ -59,7 +55,6 @@ void ImpCodeGen::visit(VarDecList *s) {
     for (it = s->vdlist.begin(); it != s->vdlist.end(); ++it) {
         (*it)->accept(this);
     }
-    return;
 }
 
 void ImpCodeGen::visit(VarDec *vd) {
@@ -68,7 +63,6 @@ void ImpCodeGen::visit(VarDec *vd) {
         // cual es la siguiente direccion?
         direcciones.add_var(*it, 0);
     }
-    return;
 }
 
 void ImpCodeGen::visit(StatementList *s) {
@@ -76,19 +70,14 @@ void ImpCodeGen::visit(StatementList *s) {
     for (it = s->slist.begin(); it != s->slist.end(); ++it) {
         (*it)->accept(this);
     }
-    return;
 }
 
 void ImpCodeGen::visit(AssignStatement *s) {
     s->rhs->accept(this);
-
-    return;
 }
 
 void ImpCodeGen::visit(PrintStatement *s) {
     s->e->accept(this);
-
-    return;
 }
 
 void ImpCodeGen::visit(IfStatement *s) {
@@ -99,12 +88,11 @@ void ImpCodeGen::visit(IfStatement *s) {
 
     s->tbody->accept(this);
 
-    if (s->fbody != NULL) {
+    if (s->fbody != nullptr) {
         s->fbody->accept(this);
     }
 
 
-    return;
 }
 
 void ImpCodeGen::visit(WhileStatement *s) {
@@ -114,8 +102,6 @@ void ImpCodeGen::visit(WhileStatement *s) {
     s->cond->accept(this);
 
     s->body->accept(this);
-
-    return;
 }
 
 int ImpCodeGen::visit(BinaryExp *e) {

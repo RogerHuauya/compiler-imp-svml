@@ -1,5 +1,4 @@
-#ifndef IMP_AST
-#define IMP_AST
+#pragma once
 
 #include <sstream>
 #include <iostream>
@@ -115,6 +114,8 @@ public:
 
 class Stm {
 public:
+    string comment;
+
     virtual void accept(ImpVisitor *v) = 0;
 
     virtual void accept(ImpValueVisitor *v) = 0;
@@ -213,8 +214,9 @@ class VarDec {
 public:
     string type;
     list<string> vars;
+    string comment;
 
-    VarDec(string type, list<string> vars);
+    VarDec(string type, list<string> vars, string comment = "");
 
     void accept(ImpVisitor *v);
 
@@ -274,7 +276,3 @@ public:
 
     ~Program();
 };
-
-
-#endif
-

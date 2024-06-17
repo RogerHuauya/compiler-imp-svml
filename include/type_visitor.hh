@@ -1,5 +1,4 @@
-#ifndef TYPE_VISITOR
-#define TYPE_VISITOR
+#pragma once
 
 #include "imp.hh"
 #include "imp_value.hh"
@@ -34,6 +33,3 @@ public:
 
     virtual ImpType visit(CondExp *e) = 0;
 };
-
-
-#endif

@@ -3,27 +3,25 @@
 void ImpPrinter::print(Program *p) {
     cout << "Program : " << endl;
     p->accept(this);
-    return;
 }
 
 void ImpPrinter::visit(Program *p) {
     p->body->accept(this);
-    return;
 }
 
 void ImpPrinter::visit(Body *b) {
     b->var_decs->accept(this);
     b->slist->accept(this);
-    return;
 }
 
 void ImpPrinter::visit(VarDecList *s) {
     list<VarDec *>::iterator it;
     for (it = s->vdlist.begin(); it != s->vdlist.end(); ++it) {
         (*it)->accept(this);
-        cout << ";" << endl;
+        cout << ";";
+        if (!(*it)->comment.empty()) cout << (*it)->comment;
+        cout << endl;
     }
-    return;
 }
 
 void ImpPrinter::visit(VarDec *vd) {
@@ -43,23 +41,22 @@ void ImpPrinter::visit(StatementList *s) {
     list<Stm *>::iterator it;
     for (it = s->slist.begin(); it != s->slist.end(); ++it) {
         (*it)->accept(this);
-        cout << ";" << endl;
+        cout << ";";
+        if (!(*it)->comment.empty()) cout << (*it)->comment;
+        cout << endl;
     }
     cout << "}" << endl;
-    return;
 }
 
 void ImpPrinter::visit(AssignStatement *s) {
     cout << s->id << " = ";
     s->rhs->accept(this);
-    return;
 }
 
 void ImpPrinter::visit(PrintStatement *s) {
     cout << "print(";
     s->e->accept(this);
     cout << ")";
-    return;
 }
 
 void ImpPrinter::visit(IfStatement *s) {
@@ -72,7 +69,6 @@ void ImpPrinter::visit(IfStatement *s) {
         s->fbody->accept(this);
     }
     cout << "endif";
-    return;
 }
 
 void ImpPrinter::visit(WhileStatement *s) {
@@ -81,7 +77,6 @@ void ImpPrinter::visit(WhileStatement *s) {
     cout << ") do" << endl;;
     s->body->accept(this);
     cout << "endwhile";
-    return;
 }
 
 

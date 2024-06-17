@@ -1,18 +1,16 @@
-
-
 #include "imp_parser.hh"
 
 
-const char *Token::token_names[27] = {
+const char *Token::token_names[28] = {
         "LPAREN", "RPAREN", "PLUS", "MINUS", "MULT", "DIV", "EXP", "LT",
         "LTEQ", "EQ",
         "NUM", "ID", "PRINT", "SEMICOLON", "COMMA", "ASSIGN", "CONDEXP", "IF",
         "THEN", "ELSE", "ENDIF", "WHILE", "DO",
-        "ENDWHILE", "ERR", "END", "VAR"};
+        "ENDWHILE", "ERR", "END", "VAR", "COMMENT"};
 
 Token::Token(Type type) : type(type) { lexema = ""; }
 
-Token::Token(Type type, const string source) : type(type) {
+Token::Token(Type type, const string& source) : type(type) {
     lexema = source;
 }
 
@@ -88,7 +86,15 @@ Token *Scanner::nextToken() {
                 }
                 break;
             case '/':
-                token = new Token(Token::DIV);
+                c = nextChar();
+                if (c == '/') {
+                    while (c != '\n') c = nextChar();
+                    rollBack();
+                    token = new Token(Token::COMMENT, getLexema());
+                } else {
+                    rollBack();
+                    token = new Token(Token::DIV);
+                }
                 break;
             case ';':
                 token = new Token(Token::SEMICOLON);
@@ -231,7 +237,7 @@ Body *Parser::parseBody() {
 }
 
 VarDec *Parser::parseVarDec() {
-    VarDec *vd = NULL;
+    VarDec *vd = nullptr;
     if (match(Token::VAR)) {
         if (!match(Token::ID))
             parserError("Expecting type in var declaration");
@@ -248,7 +254,10 @@ VarDec *Parser::parseVarDec() {
         }
         if (!match(Token::SEMICOLON))
             parserError("Expecting semicolon at end of var declaration");
-        vd = new VarDec(type, vars);
+        if (match(Token::COMMENT)) {
+            vd = new VarDec(type, vars, previous->lexema);
+        } else
+            vd = new VarDec(type, vars);
     }
     return vd;
 }
@@ -258,7 +267,7 @@ VarDecList *Parser::parseVarDecList() {
     VarDecList *vdl = new VarDecList();
     VarDec *vd;
     vd = parseVarDec();
-    while (vd != NULL) {
+    while (vd != nullptr) {
         vdl->add(vd);
         vd = parseVarDec();
     }
@@ -266,9 +275,10 @@ VarDecList *Parser::parseVarDecList() {
 }
 
 StatementList *Parser::parseStatementList() {
-    StatementList *p = new StatementList();
+    auto *p = new StatementList();
     p->add(parseStatement());
     while (match(Token::SEMICOLON)) {
+        if (match(Token::COMMENT)) p->slist.back()->comment = previous->lexema;
         p->add(parseStatement());
     }
     return p;

@@ -131,7 +131,9 @@ WhileStatement::WhileStatement(Exp *c, Body *b) : cond(c), body(b) {}
 
 StatementList::StatementList() : slist() {}
 
-VarDec::VarDec(string type, list<string> vars) : type(type), vars(vars) {}
+VarDec::VarDec(string type, list<string> vars, string comment) : type(type), vars(vars) {
+    this->comment = comment;
+}
 
 VarDecList::VarDecList() : vdlist() {}
 

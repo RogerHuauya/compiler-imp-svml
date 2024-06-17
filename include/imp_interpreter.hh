@@ -1,5 +1,4 @@
-#ifndef IMP_INTERPRETER
-#define IMP_INTERPRETER
+#pragma once
 
 #include <unordered_map>
 
@@ -11,26 +10,35 @@ using namespace std;
 
 class ImpInterpreter : public ImpValueVisitor {
 private:
-  Environment<ImpValue> env;
+    Environment<ImpValue> env;
 public:
-  void interpret(Program*);
-  void visit(Program*);
-  void visit(Body*);
-  void visit(VarDecList*);
-  void visit(VarDec*);  
-  void visit(StatementList*);
-  void visit(AssignStatement*);
-  void visit(PrintStatement*);
-  void visit(IfStatement*);
-  void visit(WhileStatement*);
-  
-  ImpValue visit(BinaryExp* e);
-  ImpValue visit(NumberExp* e);
-  ImpValue visit(IdExp* e);
-  ImpValue visit(ParenthExp* e);
-  ImpValue visit(CondExp* e);
+    void interpret(Program *);
+
+    void visit(Program *);
+
+    void visit(Body *);
+
+    void visit(VarDecList *);
+
+    void visit(VarDec *);
+
+    void visit(StatementList *);
+
+    void visit(AssignStatement *);
+
+    void visit(PrintStatement *);
+
+    void visit(IfStatement *);
+
+    void visit(WhileStatement *);
+
+    ImpValue visit(BinaryExp *e);
+
+    ImpValue visit(NumberExp *e);
+
+    ImpValue visit(IdExp *e);
+
+    ImpValue visit(ParenthExp *e);
+
+    ImpValue visit(CondExp *e);
 };
-
-
-#endif
-
