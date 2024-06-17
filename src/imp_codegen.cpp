@@ -37,7 +37,6 @@ void ImpCodeGen::codegen(Program *p, const string &outfname) {
 }
 
 void ImpCodeGen::visit(Program *p) {
-    int mem_size = 10;
     codegen(nolabel, "alloc", mem_size);
     p->body->accept(this);
     codegen(nolabel, "halt");
@@ -162,6 +161,11 @@ int ImpCodeGen::visit(CondExp *e) {
     e->etrue->accept(this);
 
     e->efalse->accept(this);
+
+    return 0;
+}
+
+int ImpCodeGen::visit(BoolConstExp *e) {
 
     return 0;
 }

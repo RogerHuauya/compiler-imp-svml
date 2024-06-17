@@ -15,6 +15,7 @@ void ImpTypeChecker::visit(Body *b) {
     env.add_level();
     b->var_decs->accept(this);
     b->slist->accept(this);
+    memory_used += env.get_memory_used();
     env.remove_level();
 }
 
@@ -73,8 +74,14 @@ void ImpTypeChecker::visit(IfStatement *s) {
     }
 
     s->tbody->accept(this);
-    if (s->fbody != nullptr)
+    if (s->fbody != nullptr){
         s->fbody->accept(this);
+        memory_used -= min(
+                s->tbody->var_decs->vdlist.size(),
+                s->fbody->var_decs->vdlist.size()
+        );
+    }
+
 }
 
 void ImpTypeChecker::visit(WhileStatement *s) {
@@ -110,10 +117,11 @@ ImpType ImpTypeChecker::visit(BinaryExp *e) {
         case LT:
         case LTEQ:
         case EQ:
-            if (result != TBOOL) {
-                cout << "Bool type expected in operation "<< e->op << endl;
+            if (result != TINT) {
+                cout << "Integer type expected in operation "<< e->op << endl;
                 exit(0);
             }
+            result = TBOOL;
             break;
     }
     return result;
@@ -151,3 +159,7 @@ ImpType ImpTypeChecker::visit(CondExp *e) {
     return ttype;
 }
 
+ImpType ImpTypeChecker::visit(BoolConstExp *e) {
+    ImpType t = TBOOL;
+    return t;
+}

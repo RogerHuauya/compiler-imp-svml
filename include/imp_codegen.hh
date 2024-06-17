@@ -2,7 +2,7 @@
 
 #include <sstream>
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cstring>
 #include <string>
 #include <fstream>
@@ -44,12 +44,17 @@ public:
 
     int visit(CondExp *e);
 
+    int visit(BoolConstExp *e);
+
+    void set_mem_size(int mem) { mem_size = mem; }
+
 private:
     std::ostringstream code;
     string nolabel;
     int current_label;
     Environment<int> direcciones;
     int siguiente_direccion;
+    int mem_size = 10;
 
     void codegen(const string& label, string instr);
 

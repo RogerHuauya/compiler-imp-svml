@@ -31,4 +31,6 @@ public:
     virtual int visit(ParenthExp *e) = 0;
 
     virtual int visit(CondExp *e) = 0;
+
+    virtual int visit(BoolConstExp *e) = 0;
 };

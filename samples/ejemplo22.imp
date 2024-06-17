@@ -1,5 +1,9 @@
 var int x, y; //hollaaaa
 x = 3; //raaaa
-if 5 < x then y = x*2 else y = x*3 endif;
+if 5 < x then
+    var int z;
+ y = x*2 else
+ var int a, b, c;
+  y = x*3 endif;
 print(y)
 

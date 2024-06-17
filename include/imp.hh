@@ -111,6 +111,21 @@ public:
     ~CondExp();
 };
 
+class BoolConstExp : public Exp {
+public:
+    bool value;
+
+    BoolConstExp(bool v);
+
+    int accept(ImpVisitor *v);
+
+    ImpValue accept(ImpValueVisitor *v);
+
+    ImpType accept(TypeVisitor *v);
+
+    ~BoolConstExp();
+};
+
 
 class Stm {
 public:

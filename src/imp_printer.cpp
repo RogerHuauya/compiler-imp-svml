@@ -114,3 +114,8 @@ int ImpPrinter::visit(CondExp *e) {
     cout << ')';
     return 0;
 }
+
+int ImpPrinter::visit(BoolConstExp *e) {
+    cout << (e->value ? "true" : "false");
+    return 0;
+}

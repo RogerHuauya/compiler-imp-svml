@@ -14,6 +14,7 @@ public:
 
 private:
     Environment<ImpType> env;
+    int memory_used = 0;
 
 public:
     void typecheck(Program *);
@@ -45,4 +46,8 @@ public:
     ImpType visit(ParenthExp *e);
 
     ImpType visit(CondExp *e);
+
+    ImpType visit(BoolConstExp *e);
+
+    int get_memory_used() const { return memory_used; }
 };

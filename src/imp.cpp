@@ -38,16 +38,18 @@ ParenthExp::ParenthExp(Exp *e) : e(e) {}
 
 CondExp::CondExp(Exp *c, Exp *et, Exp *ef) : cond(c), etrue(et), efalse(ef) {}
 
-Exp::~Exp() {}
+BoolConstExp::BoolConstExp(bool b) : value(b) {}
+
+Exp::~Exp() = default;
 
 BinaryExp::~BinaryExp() {
     delete left;
     delete right;
 }
 
-NumberExp::~NumberExp() {}
+NumberExp::~NumberExp() = default;
 
-IdExp::~IdExp() {}
+IdExp::~IdExp() = default;
 
 ParenthExp::~ParenthExp() { delete e; }
 
@@ -56,6 +58,8 @@ CondExp::~CondExp() {
     delete etrue;
     delete efalse;
 }
+
+BoolConstExp::~BoolConstExp() = default;
 
 // ImpVisitor
 int BinaryExp::accept(ImpVisitor *v) {
@@ -75,6 +79,10 @@ int ParenthExp::accept(ImpVisitor *v) {
 }
 
 int CondExp::accept(ImpVisitor *v) {
+    return v->visit(this);
+}
+
+int BoolConstExp::accept(ImpVisitor *v) {
     return v->visit(this);
 }
 
@@ -99,6 +107,10 @@ ImpValue CondExp::accept(ImpValueVisitor *v) {
     return v->visit(this);
 }
 
+ImpValue BoolConstExp::accept(ImpValueVisitor *v) {
+    return v->visit(this);
+}
+
 // TypeVisitor
 ImpType BinaryExp::accept(TypeVisitor *v) {
     return v->visit(this);
@@ -117,6 +129,10 @@ ImpType ParenthExp::accept(TypeVisitor *v) {
 }
 
 ImpType CondExp::accept(TypeVisitor *v) {
+    return v->visit(this);
+}
+
+ImpType BoolConstExp::accept(TypeVisitor *v) {
     return v->visit(this);
 }
 

@@ -86,4 +86,8 @@ public:
         return true;
     }
 
+    int get_memory_used() {
+        return ribs.back().size();
+    }
+
 };

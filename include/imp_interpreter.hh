@@ -41,4 +41,6 @@ public:
     ImpValue visit(ParenthExp *e);
 
     ImpValue visit(CondExp *e);
+
+    ImpValue visit(BoolConstExp *e);
 };

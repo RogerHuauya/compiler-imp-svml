@@ -194,3 +194,10 @@ ImpValue ImpInterpreter::visit(CondExp *e) {
     else
         return e->etrue->accept(this);
 }
+
+ImpValue ImpInterpreter::visit(BoolConstExp *e) {
+    ImpValue v;
+    v.set_default_value(TBOOL);
+    v.bool_value = e->value;
+    return v;
+}

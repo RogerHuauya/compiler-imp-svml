@@ -36,6 +36,8 @@ int main(int argc, const char *argv[]) {
     cout << endl << "Type checking:" << endl;
     checker.typecheck(program);
 
+    cg.set_mem_size(checker.get_memory_used());
+
     cout << endl << "Run program:" << endl;
     interpreter.interpret(program);
 

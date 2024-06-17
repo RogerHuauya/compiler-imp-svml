@@ -32,4 +32,6 @@ public:
     virtual ImpType visit(ParenthExp *e) = 0;
 
     virtual ImpType visit(CondExp *e) = 0;
+
+    virtual ImpType visit(BoolConstExp *e) = 0;
 };

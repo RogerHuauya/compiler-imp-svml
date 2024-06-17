@@ -35,4 +35,6 @@ public:
     int visit(ParenthExp *e);
 
     int visit(CondExp *e);
+
+    int visit(BoolConstExp *e);
 };
