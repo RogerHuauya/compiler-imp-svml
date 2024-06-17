@@ -60,12 +60,13 @@ The compiler supports the `do-while` loop, allowing the execution of statements 
 var int x, n;
 n = 10;
 x = 0;
-if (x < n) {
-    var bool a, b, x;
-} else {
-    var bool c, d;
-}
-endif;
+if x < n then
+    var int a, b, x;
+    x = 1
+else
+    var int c, d;
+    c = 3
+endif
 ```
 
 ## Compilation and Execution
