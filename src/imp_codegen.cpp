@@ -6,13 +6,13 @@ void ImpCodeGen::codegen(const string &label, string instr) {
     code << instr << endl;
 }
 
-void ImpCodeGen::codegen(const string& label, string instr, int arg) {
+void ImpCodeGen::codegen(const string &label, string instr, int arg) {
     if (label != nolabel)
         code << label << ": ";
     code << instr << " " << arg << endl;
 }
 
-void ImpCodeGen::codegen(const string& label, string instr, string jmplabel) {
+void ImpCodeGen::codegen(const string &label, string instr, string jmplabel) {
     if (label != nolabel)
         code << label << ": ";
     code << instr << " " << jmplabel << endl;
@@ -28,7 +28,7 @@ string ImpCodeGen::next_label() {
 void ImpCodeGen::codegen(Program *p, const string &outfname) {
     nolabel = "";
     current_label = 0;
-    siguiente_direccion = 0;
+    next_address = 0;
     p->accept(this);
     ofstream outfile;
     outfile.open(outfname);
@@ -43,10 +43,12 @@ void ImpCodeGen::visit(Program *p) {
 }
 
 void ImpCodeGen::visit(Body *b) {
-    direcciones.add_level();
+    int addr = next_address;
+    addresses.add_level();
     b->var_decs->accept(this);
     b->slist->accept(this);
-    direcciones.remove_level();
+    addresses.remove_level();
+    next_address = addr;
 }
 
 void ImpCodeGen::visit(VarDecList *s) {
@@ -59,8 +61,7 @@ void ImpCodeGen::visit(VarDecList *s) {
 void ImpCodeGen::visit(VarDec *vd) {
     list<string>::iterator it;
     for (it = vd->vars.begin(); it != vd->vars.end(); ++it) {
-        // cual es la siguiente direccion?
-        direcciones.add_var(*it, 0);
+        addresses.add_var(*it, next_address++);
     }
 }
 
@@ -73,10 +74,12 @@ void ImpCodeGen::visit(StatementList *s) {
 
 void ImpCodeGen::visit(AssignStatement *s) {
     s->rhs->accept(this);
+    codegen(nolabel, "store", addresses.lookup(s->id));
 }
 
 void ImpCodeGen::visit(PrintStatement *s) {
     s->e->accept(this);
+    codegen(nolabel, "print");
 }
 
 void ImpCodeGen::visit(IfStatement *s) {
@@ -84,23 +87,30 @@ void ImpCodeGen::visit(IfStatement *s) {
     string l2 = next_label();
 
     s->cond->accept(this);
+    codegen(nolabel, "jmpz", l1);
 
     s->tbody->accept(this);
+    codegen(nolabel, "goto", l2);
+    codegen(l1, "skip");
 
     if (s->fbody != nullptr) {
         s->fbody->accept(this);
     }
-
-
+    codegen(l2, "skip");
 }
 
 void ImpCodeGen::visit(WhileStatement *s) {
     string l1 = next_label();
     string l2 = next_label();
 
+    codegen(l1, "skip");
     s->cond->accept(this);
 
+    codegen(nolabel, "jmpz", l2);
     s->body->accept(this);
+
+    codegen(nolabel, "goto", l1);
+    codegen(l2, "skip");
 }
 
 int ImpCodeGen::visit(BinaryExp *e) {
@@ -133,17 +143,17 @@ int ImpCodeGen::visit(BinaryExp *e) {
             cout << "binop " << Exp::binopToString(e->op) << " not implemented"
                  << endl;
     }
-
+    codegen(nolabel, op);
     return 0;
 }
 
 int ImpCodeGen::visit(NumberExp *e) {
-
+    codegen(nolabel, "push", e->value);
     return 0;
 }
 
 int ImpCodeGen::visit(IdExp *e) {
-
+    codegen(nolabel, "load", addresses.lookup(e->id));
     return 0;
 }
 
@@ -157,10 +167,14 @@ int ImpCodeGen::visit(CondExp *e) {
     string l2 = next_label();
 
     e->cond->accept(this);
+    codegen(nolabel, "jmpz", l1);
 
     e->etrue->accept(this);
+    codegen(nolabel, "goto", l2);
+    codegen(l1, "skip");
 
     e->efalse->accept(this);
+    codegen(l2, "skip");
 
     return 0;
 }

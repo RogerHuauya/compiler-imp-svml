@@ -52,8 +52,8 @@ private:
     std::ostringstream code;
     string nolabel;
     int current_label;
-    Environment<int> direcciones;
-    int siguiente_direccion;
+    Environment<int> addresses;
+    int next_address;
     int mem_size = 10;
 
     void codegen(const string& label, string instr);
