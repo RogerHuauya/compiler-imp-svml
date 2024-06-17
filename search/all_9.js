@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vardec_31',['VarDec',['../classVarDec.html',1,'']]],
-  ['vardeclist_32',['VarDecList',['../classVarDecList.html',1,'']]]
+  ['token_30',['Token',['../classToken.html',1,'']]],
+  ['typevisitor_31',['TypeVisitor',['../classTypeVisitor.html',1,'']]]
 ];

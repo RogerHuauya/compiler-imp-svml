@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['whilestatement_67',['WhileStatement',['../classWhileStatement.html',1,'']]]
+  ['vardec_67',['VarDec',['../classVarDec.html',1,'']]],
+  ['vardeclist_68',['VarDecList',['../classVarDecList.html',1,'']]]
 ];
