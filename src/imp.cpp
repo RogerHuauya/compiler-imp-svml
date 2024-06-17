@@ -141,7 +141,7 @@ Body::Body(VarDecList *vdl, StatementList *sl) : var_decs(vdl), slist(sl) {}
 
 Program::Program(Body *b) : body(b) {}
 
-Stm::~Stm() {}
+Stm::~Stm() = default;
 
 AssignStatement::~AssignStatement() { delete rhs; }
 
@@ -158,11 +158,11 @@ WhileStatement::~WhileStatement() {
     delete cond;
 }
 
-StatementList::~StatementList() {}
+StatementList::~StatementList() = default;
 
-VarDec::~VarDec() {}
+VarDec::~VarDec() = default;
 
-VarDecList::~VarDecList() {}
+VarDecList::~VarDecList() = default;
 
 Body::~Body() {
     delete slist;

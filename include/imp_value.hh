@@ -18,12 +18,12 @@ public:
 
     ImpType type;
     // podemos ser mas eficientes con la memoria?
-    int int_value;
-    bool bool_value;
+    int int_value{};
+    bool bool_value{};
 
     void set_default_value(ImpType tt);
 
-    static ImpType get_basic_type(string s);
+    static ImpType get_basic_type(const string& s);
 };
 
 std::ostream &operator<<(std::ostream &outs, const ImpValue &v);

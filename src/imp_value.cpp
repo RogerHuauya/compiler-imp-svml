@@ -2,10 +2,10 @@
 
 ImpValue::ImpValue() : type(NOTYPE) {}
 
-ImpType ImpValue::get_basic_type(string s) {
+ImpType ImpValue::get_basic_type(const string &s) {
     ImpType tt;
-    if (s.compare("int") == 0) tt = TINT;
-    else if (s.compare("bool") == 0) tt = TBOOL;
+    if (s == "int") tt = TINT;
+    else if (s == "bool") tt = TBOOL;
     else tt = NOTYPE;
     return tt;
 }
@@ -17,7 +17,6 @@ void ImpValue::set_default_value(ImpType tt) {
     } else if (tt == TBOOL) {
         bool_value = true;
     }
-    return;
 }
 
 std::ostream &operator<<(std::ostream &outs, const ImpValue &v) {
